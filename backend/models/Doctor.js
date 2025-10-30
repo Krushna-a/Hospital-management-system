@@ -14,7 +14,9 @@ class Doctor {
   static async findByUserId(userId) {
     const connection = await getConnection();
     const [rows] = await connection.execute(
-      'SELECT * FROM doctors WHERE user_id = ?',
+      `SELECT d.*, u.full_name, u.email FROM doctors d
+       JOIN users u ON d.user_id = u.id
+       WHERE d.user_id = ?`,
       [userId]
     );
     return rows[0];

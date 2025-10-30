@@ -26,11 +26,11 @@ const Home = () => {
               all in one place
             </p>
 
-            <div className="flex flex-wrap gap-4 pt-4">
+            <a href="/appointment" className="flex flex-wrap gap-4 pt-4">
               <button className="bg-blue-600 hover:bg-blue-700 text-black px-6 py-3 rounded-lg font-medium transition-colors">
                 Book Appointment
               </button>
-            </div>
+            </a>
           </div>
         </div>
       </div>

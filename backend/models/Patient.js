@@ -14,7 +14,9 @@ class Patient {
   static async findByUserId(userId) {
     const connection = await getConnection();
     const [rows] = await connection.execute(
-      'SELECT * FROM patients WHERE user_id = ?',
+      `SELECT p.*, u.full_name, u.email FROM patients p
+       JOIN users u ON p.user_id = u.id
+       WHERE p.user_id = ?`,
       [userId]
     );
     return rows[0];
@@ -29,6 +31,19 @@ class Patient {
       [id]
     );
     return rows[0];
+  }
+
+  static async findForDoctor(doctorId) {
+    const connection = await getConnection();
+    const [rows] = await connection.execute(
+      `SELECT DISTINCT p.*, u.full_name, u.email 
+       FROM patients p
+       JOIN users u ON p.user_id = u.id
+       JOIN appointments a ON p.id = a.patient_id
+       WHERE a.doctor_id = ?`,
+      [doctorId]
+    );
+    return rows;
   }
 
   static async update(id, patientData) {

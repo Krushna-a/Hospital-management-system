@@ -24,7 +24,7 @@ router.get('/for-doctor', verifyToken, checkRole(['doctor']), async (req, res) =
       return res.status(404).json({ error: 'Doctor profile not found.' });
     }
     // This assumes a method exists to get patients based on appointments or another link
-    const patients = await Patient.findByDoctorId(doctor.id);
+    const patients = await Patient.findForDoctor(doctor.id);
     res.json(patients);
   } catch (error) {
     console.error('Error fetching doctor\'s patients:', error);

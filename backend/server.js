@@ -49,12 +49,16 @@ const authRoutes = require('./routes/auth');
 const doctorRoutes = require('./routes/doctors');
 const appointmentRoutes = require('./routes/appointments');
 const patientRoutes = require('./routes/patients');
+const profileRoutes = require('./routes/profile');
+const billsRoutes = require('./routes/bills');
 
 // Use routes
 app.use('/api/auth', authRoutes);
 app.use('/api/doctors', doctorRoutes);
 app.use('/api/appointments', appointmentRoutes);
 app.use('/api/patients', patientRoutes);
+app.use('/api/profile', profileRoutes);
+app.use('/api/bills', billsRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
